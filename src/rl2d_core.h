@@ -36,17 +36,19 @@ struct Vec2d {
 	Vec2d perp();
 };
 
-Vec2d addVec(Vec2d v1, Vec2d v2);
-Vec2d subVec(Vec2d v1, Vec2d v2);
-Vec2d multVec(Vec2d v, float n);
+namespace core {
+	Vec2d addVec(Vec2d v1, Vec2d v2);
+	Vec2d subVec(Vec2d v1, Vec2d v2);
+	Vec2d multVec(Vec2d v, float n);
 
-void DrawArrow(Vec2d v_base, Vec2d v_target, Color c);
+	void DrawArrow(Vec2d v_base, Vec2d v_target, Color c);
 
-std::tuple<float, Vec2d> intersect(Vec2d start_a, Vec2d end_a, Vec2d start_b, Vec2d end_b);
-float minDist(Vec2d p, Vec2d start_a, Vec2d end_a);
-Matrix3x1 vecToMatrix3x1(Vec2d point);
-Vec2d matrix3x1ToVec(Matrix3x1 matrix);
-Matrix3x1 matmul3x1(Matrix3x3 a, Matrix3x1 b);
-Matrix3x1 rotate(Vec2d point, Vec2d center, float angel);
+	std::tuple<float, Vec2d> intersect(Vec2d start_a, Vec2d end_a, Vec2d start_b, Vec2d end_b);
+	float minDist(Vec2d p, Vec2d start_a, Vec2d end_a);
+	Matrix3x1 vecToMatrix3x1(Vec2d point);
+	Vec2d matrix3x1ToVec(Matrix3x1 matrix);
+	Matrix3x1 matmul3x1(Matrix3x3 a, Matrix3x1 b);
+	Matrix3x1 rotate(Vec2d point, Vec2d center, float angel);
+}
 
 #endif

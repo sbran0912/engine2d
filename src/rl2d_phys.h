@@ -27,11 +27,12 @@ struct Figure2d {
     Vec2d checkKicking();
 };
 
-struct Box: public Figure2d {
-    std::array<Vec2d, 5> vertices;
+struct Ball : public Figure2d {
+    float radius;
+    Vec2d orientation;
 
-    Box();
-    Box(float x, float y, float w, float h);
+    Ball();
+    Ball(float x, float y, float r);
 
     void rotate(float angle);
     void draw(float thick, Color c);
@@ -41,12 +42,11 @@ struct Box: public Figure2d {
     void test();
 };
 
-struct Ball : public Figure2d {
-    float radius;
-    Vec2d orientation;
+struct Box: public Figure2d {
+    std::array<Vec2d, 5> vertices;
 
-    Ball();
-    Ball(float x, float y, float r);
+    Box();
+    Box(float x, float y, float w, float h);
 
     void rotate(float angle);
     void draw(float thick, Color c);

@@ -34,17 +34,55 @@ Vec2d Figure2d::checkKicking() {
 
         if (marked) {
             core::DrawArrow(location, mousePos, RED);
-            //printf("Box Location x und y: %f %f, MousPos x und y: %f %f\n\n", location.pos.x, location.pos.y, mousePos.pos.x, mousePos.pos.y);
         }
     }
 
     if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT) && marked) {
-        printf("Maus losgelassen, Staerke : %f\n\n", core::subVec(location, mousePos).mag());
         marked = false;
-        return core::subVec(location, mousePos);
+        return core::subVec(mousePos, location);
     }
 
     return Vec2d{0, 0};
+}
+
+Ball::Ball(): 
+    Figure2d(),
+    radius{0},
+    orientation{0.0f, 0.0f}
+    {}
+
+Ball::Ball(float x, float y, float r):
+    Figure2d(x, y),
+    radius{r},
+    orientation{ radius + x, 0 + y }
+    {
+        mass = radius * 2;
+        inertia = radius * radius * radius / 2;
+    }
+
+void Ball::rotate(float angle) {
+    // noch leer
+}
+
+void Ball::draw(float thick, Color c) {
+    DrawCircleV(location.pos,radius, c);
+    DrawLineEx(location.pos, orientation.pos, 3, WHITE);
+}
+
+void Ball::update(){
+    // noch leer
+}
+
+void Ball::applyForce(Vec2d force, float angForce){
+    //noch leer
+}
+
+void Ball::resetPos(){
+    //noch leer
+}
+
+void Ball::test() {
+    printf("Hier ist der Ball\n");
 }
 
 Box::Box():
@@ -88,43 +126,4 @@ void Box::resetPos() {
 
 void Box::test() {
     printf("Hier ist die Box\n");
-}
-
-Ball::Ball(): 
-    Figure2d(),
-    radius{0},
-    orientation{0.0f, 0.0f}
-    {}
-
-Ball::Ball(float x, float y, float r):
-    Figure2d(x, y),
-    radius{r},
-    orientation{ radius + x, 0 + y }
-    {
-        mass = radius * 2;
-        inertia = radius * radius * radius / 2;
-    }
-
-void Ball::rotate(float angle) {
-    // noch leer
-}
-
-void Ball::draw(float thick, Color c) {
-    // noch leer
-}
-
-void Ball::update(){
-    // noch leer
-}
-
-void Ball::applyForce(Vec2d force, float angForce){
-    //noch leer
-}
-
-void Ball::resetPos(){
-    //noch leer
-}
-
-void Ball::test() {
-    printf("Hier ist der Ball\n");
 }

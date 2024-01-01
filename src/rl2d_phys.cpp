@@ -1,27 +1,5 @@
 #include "rl2d_phys.h"
 
-Figure2d::Figure2d():
-    location{ 0.0f, 0.0f },
-    velocity{ 0.0f, 0.0f },
-    angVelocity{ 0.0f },
-    accel{ 0.0f, 0.0f },
-    angAccel{ 0.0f },
-    mass{ 0.0f },
-    inertia{ 0.0f },
-    marked{ false }
-    {}
-
-Figure2d::Figure2d(float x, float y):
-    location{ x, y },
-    velocity{ 0.0f, 0.0f },
-    angVelocity{ 0.0f },
-    accel{ 0.0f, 0.0f },
-    angAccel{ 0.0f },
-    mass{ 0.0f },
-    inertia{ 0.0f },
-    marked{ false }
-    {}
-
 Vec2d Figure2d::checkKicking() {
 
     Vec2d mousePos{ (float)GetMouseX(), (float)GetMouseY() };
@@ -46,18 +24,22 @@ Vec2d Figure2d::checkKicking() {
 }
 
 Ball::Ball(): 
-    Figure2d(),
-    radius{0},
-    orientation{0.0f, 0.0f}
+    Figure2d()
     {}
 
-Ball::Ball(float x, float y, float r):
-    Figure2d(x, y),
-    radius{r},
-    orientation{ radius + x, 0 + y }
+Ball::Ball(float x, float y, float r)
     {
+        typ = "Ball";
+        marked = false;
+        location = Vec2d{ x, y };
+        radius = r;
         mass = radius * 2;
         inertia = radius * radius * radius / 2;
+        velocity = Vec2d{ 0, 0 };
+        angVelocity = 0;
+        accel = Vec2d{ 0, 0 };
+        angAccel = 0;
+        orientation = Vec2d{ radius + x, 0 + y };
     }
 
 void Ball::rotate(float angle) {
@@ -66,7 +48,7 @@ void Ball::rotate(float angle) {
 
 void Ball::draw(float thick, Color c) {
     DrawCircleV(location.pos,radius, c);
-    DrawLineEx(location.pos, orientation.pos, 3, WHITE);
+    DrawLineEx(location.pos, orientation.pos, 3, c);
 }
 
 void Ball::update(){
@@ -82,21 +64,29 @@ void Ball::resetPos(){
 }
 
 void Ball::test() {
-    printf("Hier ist der Ball\n");
+    //printf("Hier ist der Ball\n");
 }
 
 Box::Box():
-    Figure2d(),
-    vertices{ Vec2d{ 0.0f, 0.0f }, Vec2d{ 0.0f, 0.0f }, Vec2d(0.0f, 0.0f), Vec2d{0.0f, 0.0f}, Vec2d{ 0.0f, 0.0f } }
+    Figure2d()
     {}
 
-Box::Box(float x, float y, float w, float h):
-    Figure2d(x, y),
-    vertices{ Vec2d{ x, y }, Vec2d{ x + w, y }, Vec2d(x + w, y + h), Vec2d{x, y + h}, Vec2d{ x, y } }
+Box::Box(float x, float y, float w, float h)
     {
-        location = { x + w / 2, y + h / 2 };
-        mass = { (w + h) * 2 };
-        inertia = { w * h * w };
+        typ = "Box";
+        marked = false;
+        location = Vec2d{ x + w / 2, y + h / 2 };
+        mass = (w + h) * 2;
+        inertia = w * h * w;
+        velocity = Vec2d{ 0, 0 };
+        angVelocity = 0;
+        accel = Vec2d{ 0, 0 };
+        angAccel = 0;
+        vertices[0] = Vec2d{ x, y };
+        vertices[1] = Vec2d{ x + w, y };
+        vertices[2] = Vec2d(x + w, y + h);
+        vertices[3] = Vec2d{x, y + h};
+        vertices[4] = Vec2d{ x, y };
     }
 
 void Box::rotate(float angle) {
@@ -125,5 +115,5 @@ void Box::resetPos() {
 }
 
 void Box::test() {
-    printf("Hier ist die Box\n");
+    //printf("Hier ist die Box\n");
 }

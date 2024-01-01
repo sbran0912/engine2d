@@ -1,5 +1,9 @@
 #include <tuple>
+#include <cmath>
 #include <raylib.h>
+#include <string>
+#include <array>
+#include <random>
 
 #ifndef CORE_H
 #define CORE_H
@@ -49,6 +53,8 @@ namespace core {
 	Vec2d matrix3x1ToVec(Matrix3x1 matrix);
 	Matrix3x1 matmul3x1(Matrix3x3 a, Matrix3x1 b);
 	Matrix3x1 rotate(Vec2d point, Vec2d center, float angel);
+
+	int random(int start, int end);
 }
 
 #endif

@@ -1,67 +1,21 @@
-#include <stdio.h>
-#include <tuple>
+#include <iostream>
+#include <vector>
 #include "rl2d_core.h"
 #include "rl2d_phys.h"
+#include <memory>
 
 int main() {
+	std::vector<std::unique_ptr<Figure2d>> list{};
+	list.push_back(std::make_unique<Box>(200.0f, 300.0f, 100.0f, 50.0f));
+	list.push_back(std::make_unique<Ball>(200.0f, 300.0f, 10.0f));
 
-	Vec2d p = Vec2d(5, 7);
-	Vec2d c = Vec2d(3, 3);
-	auto d = c.copy();
+	for (auto &l:list)
+	{
+		l->test();
+		std::cout << l->typ << " mit pos.x: " << l->location.pos.x << " und Radius: " << l->radius << "\n";
+	}
 
-	printf("Vector p.pos.x %f p.pos.y %f\n\n", p.pos.x, p.pos.y);
-	printf("Vector c.pos.x %f c.pos.y %f\n\n", c.pos.x, c.pos.y);
-	printf("Vector d.pos.x %f d.pos.y %f\n\n", d.pos.x, d.pos.y);
-	c.set(4, 4);
-	printf("Nach set: Vector c.pos.x %f c.pos.y %f\n", c.pos.x, c.pos.y);
-	printf("Vector d.pos.x %f d.pos.y %f\n\n", d.pos.x, d.pos.y);
-
-	Matrix3x1 p_rotated = core::rotate(p, c, 0.2f);
-	printf("Bevor Drehung %f %f\n", p.pos.x, p.pos.y);
-	printf("Nach Drehung %f %f\n", p_rotated.index[0], p_rotated.index[1]);
-	printf("Nach Drehung als Vector p.x %f p.y %f\n\n", core::matrix3x1ToVec(p_rotated).pos.x, core::matrix3x1ToVec(p_rotated).pos.y);
-	
-	Vec2d a1(20, 10);
-	Vec2d a2(200,200);
-	Vec2d b1(0, 100);
-	Vec2d b2(300, 100);
-
-	std::tuple<float, Vec2d> sp = core::intersect(a1, a2, b1, b2);
-	printf("Schnitt: %f %f ", std::get<1>(sp).pos.x, std::get<1>(sp).pos.y);
-	printf("Laenge: %f \n\n", std::get<0>(sp));
-	printf("Distanz von a1 zu line_b: %f\n\n", core::minDist(a1, b1, b2));
-
-	Box box{ 400, 200, 150, 80 };
-	Ball ball{300,200,50};
-
-
-    // Initialization
-    //--------------------------------------------------------------------------------------
-    const int screenWidth = 1200;
-    const int screenHeight = 800; 
-
-    InitWindow(screenWidth, screenHeight, "raylib");
-    SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
-
-    // Main game loop
-    while (!WindowShouldClose())    // Detect window close button or ESC key
-    {
-        BeginDrawing();
-
-        ClearBackground(RAYWHITE);
-		DrawCircleV(a1.pos,3, RED);
-		DrawLineV(a1.pos, a2.pos, BLACK);
-		DrawLineV(b1.pos, b2.pos, RED);
-		box.draw(3, GREEN);
-		ball.draw(3, RED);
-		//box.rotate(0.05);
-		Vec2d f = box.checkKicking();
-		if (f.mag() > 0) printf("Kicking Force = %f(%f,%f)\n",f.mag(), f.pos.x, f.pos.y);
-		
-    	EndDrawing();
-    }
-
-    // De-Initialization
-    CloseWindow();                  // Close window and OpenGL context
-	return 0;
+	std::cout << " Zufall " << core::random(30, 80);
+	std::cout << " Zufall " << core::random(10, 20);
+	std::cout << " Zufall " << core::random(10, 20);
 }

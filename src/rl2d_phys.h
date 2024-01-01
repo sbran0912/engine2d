@@ -1,11 +1,10 @@
-#include <string>
-#include <array>
 #include "rl2d_core.h"
 
 #ifndef PHYS_H
 #define PHYS_H
 
 struct Figure2d {
+    std::string typ;
     Vec2d location;
     Vec2d velocity;
     float angVelocity;
@@ -14,9 +13,9 @@ struct Figure2d {
     float mass;
     float inertia;
     bool marked;
-
-    Figure2d();
-    Figure2d(float x, float y);
+    float radius;
+    Vec2d orientation;
+    std::array<Vec2d, 5> vertices;
 
     virtual void draw(float thick, Color c) = 0;
     virtual void rotate(float angle) = 0;
@@ -28,9 +27,6 @@ struct Figure2d {
 };
 
 struct Ball : public Figure2d {
-    float radius;
-    Vec2d orientation;
-
     Ball();
     Ball(float x, float y, float r);
 
@@ -43,8 +39,6 @@ struct Ball : public Figure2d {
 };
 
 struct Box: public Figure2d {
-    std::array<Vec2d, 5> vertices;
-
     Box();
     Box(float x, float y, float w, float h);
 

@@ -12,7 +12,12 @@ int main() {
 	for (auto &l:list)
 	{
 		l->test();
-		std::cout << l->typ << " mit pos.x: " << l->location.pos.x << " und Radius: " << l->radius << "\n";
+		std::cout << l << " " << l->typ << " mit pos.x: " << l->location.pos.x << " und Radius: " << l->radius << "\n";
+	}
+	for (auto& l : list)
+	{
+		l->test();
+		std::cout << l << " " << l->typ << " mit pos.x: " << l->location.pos.x << " und Radius: " << l->radius << "\n";
 	}
 
 	std::cout << " Zufall " << core::random(30, 80);

@@ -99,6 +99,12 @@ Vec2d core::multVec(Vec2d v, float n) {
 	return vmult;
 }
 
+Vec2d core::divVec(Vec2d v, float n) {
+	Vec2d vmult = v.copy();
+	vmult.div(n);
+	return vmult;
+}
+
 void core::DrawArrow(Vec2d v_base, Vec2d v_target, Color c) {
 	//Vec2d v_heading = subVec(v_target, v_base);
 	DrawLineEx(v_base.pos, v_target.pos, 4, c);
@@ -199,4 +205,13 @@ int core::random(int start, int end){
 	std::random_device rd;
 	std::uniform_int_distribution<int> dist(start, end);
 	return dist(rd);
+}
+
+float core::limitNum(float number, float limit) {
+	float vorzeichen = (number < 0) ? -1 : 1;
+	float numberMag = std::abs(number);
+	if (numberMag > limit) {
+		numberMag = limit;
+	}
+	return numberMag * vorzeichen;
 }

@@ -21,7 +21,7 @@ struct Figure2d {
     virtual void rotate(float angle) = 0;
     virtual void update() = 0;
     virtual void applyForce(Vec2d force, float angForce) = 0;
-    virtual void resetPos() = 0;
+    virtual void resetPos(Vec2d v) = 0;
     virtual void test() = 0;
     Vec2d checkKicking();
 };
@@ -34,7 +34,7 @@ struct Ball : public Figure2d {
     void draw(float thick, Color c);
     void update();
     void applyForce(Vec2d force, float angForce);
-    void resetPos();
+    void resetPos(Vec2d v);
     void test();
 };
 
@@ -46,7 +46,7 @@ struct Box: public Figure2d {
     void draw(float thick, Color c);
     void update();
     void applyForce(Vec2d force, float angForce);
-    void resetPos();
+    void resetPos(Vec2d v);
     void test();
 };
 

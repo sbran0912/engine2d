@@ -43,7 +43,7 @@ Ball::Ball(float x, float y, float r)
     }
 
 void Ball::rotate(float angle) {
-    // noch leer
+    orientation.rotate(location, angle);
 }
 
 void Ball::draw(float thick, Color c) {
@@ -52,15 +52,27 @@ void Ball::draw(float thick, Color c) {
 }
 
 void Ball::update(){
-    // noch leer
+    velocity.add(accel);
+    velocity.limit(10);
+    accel.set(0, 0);
+    angVelocity += angAccel;
+    angVelocity = core::limitNum(angVelocity, 0.05);
+    angAccel = 0;
+
+    location.add(velocity);
+    orientation.add(velocity);
+    rotate(angVelocity);
 }
 
 void Ball::applyForce(Vec2d force, float angForce){
-    //noch leer
+    accel.add(core::divVec(force, mass));
+    angAccel += angForce / mass;
 }
 
-void Ball::resetPos(){
-    //noch leer
+void Ball::resetPos(Vec2d v){
+    location.add(v);
+    orientation.add(v);
+
 }
 
 void Ball::test() {
@@ -103,15 +115,36 @@ void Box::draw(float thick, Color c) {
 }
 
 void Box::update() {
-    //noch leer
+    velocity.add(accel);
+    velocity.limit(10);
+    accel.set(0, 0);
+    angVelocity += angAccel;
+    angVelocity = core::limitNum(angVelocity, 0.05);
+    angAccel = 0;
+
+    location.add(velocity);
+    vertices[0].add(velocity);
+    vertices[1].add(velocity);
+    vertices[2].add(velocity);
+    vertices[3].add(velocity);
+    vertices[4].add(velocity);
+    rotate(angVelocity);
 }
 
 void Box::applyForce(Vec2d force, float angForce){
-    //noch leer
+    accel.add(core::divVec(force, mass));
+    angAccel += angForce / mass;
 }
 
-void Box::resetPos() {
-    //noch leer
+void Box::resetPos(Vec2d v) {
+    if (mass != INFINITY) {
+        location.add(v);
+        vertices[0].add(v);
+        vertices[1].add(v);
+        vertices[2].add(v);
+        vertices[3].add(v);
+        vertices[4].add(v);
+    }
 }
 
 void Box::test() {

@@ -44,7 +44,7 @@ namespace core {
 	Vec2d addVec(Vec2d v1, Vec2d v2);
 	Vec2d subVec(Vec2d v1, Vec2d v2);
 	Vec2d multVec(Vec2d v, float n);
-
+	Vec2d divVec(Vec2d v, float n);
 	void DrawArrow(Vec2d v_base, Vec2d v_target, Color c);
 
 	std::tuple<float, Vec2d> intersect(Vec2d start_a, Vec2d end_a, Vec2d start_b, Vec2d end_b);
@@ -55,6 +55,7 @@ namespace core {
 	Matrix3x1 rotate(Vec2d point, Vec2d center, float angel);
 
 	int random(int start, int end);
+	float limitNum(float number, float limit);
 }
 
 #endif

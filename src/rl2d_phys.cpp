@@ -23,10 +23,6 @@ Vec2d Figure2d::checkKicking() {
     return Vec2d{0, 0};
 }
 
-Ball::Ball(): 
-    Figure2d()
-    {}
-
 Ball::Ball(float x, float y, float r)
     {
         typ = "Ball";
@@ -47,8 +43,9 @@ void Ball::rotate(float angle) {
 }
 
 void Ball::draw(float thick, Color c) {
-    DrawCircleV(location.pos,radius, c);
-    DrawLineEx(location.pos, orientation.pos, 3, c);
+    DrawRing(location.pos, radius - 3, radius, 0, 360, 1, c);
+    //DrawCircleV(location.pos,radius, c);
+    DrawLineEx(location.pos, orientation.pos, thick, c);
 }
 
 void Ball::update(){
@@ -56,7 +53,7 @@ void Ball::update(){
     velocity.limit(10);
     accel.set(0, 0);
     angVelocity += angAccel;
-    angVelocity = core::limitNum(angVelocity, 0.05);
+    angVelocity = core::limitNum(angVelocity, 0.05f);
     angAccel = 0;
 
     location.add(velocity);
@@ -78,10 +75,6 @@ void Ball::resetPos(Vec2d v){
 void Ball::test() {
     //printf("Hier ist der Ball\n");
 }
-
-Box::Box():
-    Figure2d()
-    {}
 
 Box::Box(float x, float y, float w, float h)
     {
@@ -119,7 +112,7 @@ void Box::update() {
     velocity.limit(10);
     accel.set(0, 0);
     angVelocity += angAccel;
-    angVelocity = core::limitNum(angVelocity, 0.05);
+    angVelocity = core::limitNum(angVelocity, 0.05f);
     angAccel = 0;
 
     location.add(velocity);

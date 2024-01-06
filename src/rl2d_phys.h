@@ -1,7 +1,5 @@
+#pragma once
 #include "rl2d_core.h"
-
-#ifndef PHYS_H
-#define PHYS_H
 
 struct Figure2d {
     std::string typ;
@@ -27,7 +25,6 @@ struct Figure2d {
 };
 
 struct Ball : public Figure2d {
-    Ball();
     Ball(float x, float y, float r);
 
     void rotate(float angle);
@@ -39,7 +36,6 @@ struct Ball : public Figure2d {
 };
 
 struct Box: public Figure2d {
-    Box();
     Box(float x, float y, float w, float h);
 
     void rotate(float angle);
@@ -49,5 +45,3 @@ struct Box: public Figure2d {
     void resetPos(Vec2d v);
     void test();
 };
-
-#endif

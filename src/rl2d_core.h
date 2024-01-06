@@ -1,12 +1,10 @@
+#pragma once
 #include <tuple>
 #include <cmath>
 #include <raylib.h>
 #include <string>
 #include <array>
 #include <random>
-
-#ifndef CORE_H
-#define CORE_H
 
 struct Matrix3x3 {
 	float index[3][3];
@@ -57,5 +55,3 @@ namespace core {
 	int random(int start, int end);
 	float limitNum(float number, float limit);
 }
-
-#endif

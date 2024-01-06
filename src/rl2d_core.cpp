@@ -208,10 +208,9 @@ int core::random(int start, int end){
 }
 
 float core::limitNum(float number, float limit) {
-	float vorzeichen = (number < 0) ? -1 : 1;
-	float numberMag = std::abs(number);
-	if (numberMag > limit) {
-		numberMag = limit;
-	}
+	int vorzeichen = (number < 0) ? -1 : 1;
+	float numberMag = number * vorzeichen;
+	if (numberMag > limit) numberMag = limit;
+
 	return numberMag * vorzeichen;
 }

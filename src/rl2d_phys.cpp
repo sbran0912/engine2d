@@ -25,7 +25,7 @@ Vec2d Figure2d::checkKicking() {
 
 Ball::Ball(float x, float y, float r)
     {
-        typ = "Ball";
+        typ = 'L';
         marked = false;
         location = Vec2d{ x, y };
         radius = r;
@@ -78,7 +78,7 @@ void Ball::test() {
 
 Box::Box(float x, float y, float w, float h)
     {
-        typ = "Box";
+        typ = 'X';
         marked = false;
         location = Vec2d{ x + w / 2, y + h / 2 };
         mass = (w + h) * 2;

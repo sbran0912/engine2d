@@ -2,18 +2,18 @@
 #include "rl2d_core.h"
 
 struct Figure2d {
-    std::string typ;
-    Vec2d location;
-    Vec2d velocity;
-    float angVelocity;
-    Vec2d accel;
-    float angAccel;
-    float mass;
-    float inertia;
-    bool marked;
-    float radius;
-    Vec2d orientation;
-    std::array<Vec2d, 5> vertices;
+    char typ;
+    Vec2d location{0.0f, 0.0f};
+    Vec2d velocity{0.0f, 0.0f};
+    float angVelocity{0};
+    Vec2d accel{0.0f, 0.0f};
+    float angAccel{0};
+    float mass{0};
+    float inertia{0};
+    bool marked{false};
+    float radius{0};
+    Vec2d orientation{0.0f, 0.0f};
+    std::array<Vec2d, 5> vertices{};
 
     virtual void draw(float thick, Color c) = 0;
     virtual void rotate(float angle) = 0;
